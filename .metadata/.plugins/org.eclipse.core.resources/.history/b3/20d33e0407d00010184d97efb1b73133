@@ -1,0 +1,15 @@
+# Build
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
+WORKDIR /novanotes
+COPY pom.xml .
+COPY src ./src
+RUN mvn -q -e -DskipTests package
+
+#Run (we use Jre instead of JDK for only runtime needs)
+FROM eclipse-temurin:17-jre
+WORKDIR /novanotes
+COPY --from=builder /novanotes/target/*.jar novanotes.jar
+# Set environment variables
+ENV SECURITY_JWT_SECRET_KEY=1fa9e1f81c2c2dea44c1f5d1d1cfa51a4bb8546046fa7e915e1489fe5f965fa4
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","novanotes.jar"]

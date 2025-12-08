@@ -1,0 +1,42 @@
+package dev.novanotes.backend.bean;
+
+import dev.novanotes.backend.entity.Users;
+
+public class StatusBean {
+	private String StatusCode;
+	private String GeneratedCode;
+	private String accessToken;
+	private Users user;
+	
+	public StatusBean(String statusCode, String generatedCode, String accessToken, Users user) {
+		super();
+		StatusCode = statusCode;
+		GeneratedCode = generatedCode;
+		this.accessToken = accessToken;
+		this.user = user;
+	}
+	public String getStatusCode() {
+		return StatusCode;
+	}
+	public void setStatusCode(String statusCode) {
+		StatusCode = statusCode;
+	}
+	public String getGeneratedCode() {
+		return GeneratedCode;
+	}
+	public void setGeneratedCode(String generatedCode) {
+		GeneratedCode = generatedCode;
+	}
+	public String getAccessToken() {
+		return accessToken;
+	}
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+	public Users getUser() {
+		return user;
+	}
+	public void setUser(Users user) {
+		this.user = user;
+	}
+}

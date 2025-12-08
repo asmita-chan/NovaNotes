@@ -1,0 +1,10 @@
+npx @angular/cli new frontend
+
+
+Docker commands:
+
+docker container ls
+docker run --name notesDB -e POSTGRES_PASSWORD=admin -p 5432:5432 -d postgres
+docker build -t novanotes-backend .
+
+docker run -p 8080:8080 --name novanotes-backend --link notesDB:db -e SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=admin -e SECURITY_JWT_SECRET_KEY=1fa9e1f81c2c2dea44c1f5d1d1cfa51a4bb8546046fa7e915e1489fe5f965fa4 novanotes-backend

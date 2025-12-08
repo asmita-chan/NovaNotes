@@ -1,0 +1,5 @@
+package dev.novanotes.backend.bean;
+
+public class LoginResponse {
+
+}

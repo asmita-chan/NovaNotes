@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "4200:80" #local_port : container_port
+    restart: always
+
+  backend:
+    build: ./backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/notesdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+      SECURITY_JWT_SECRET_KEY: 1fa9e1f81c2c2dea44c1f5d1d1cfa51a4bb8546046fa7e915e1489fe5f965fa4
+    ports:
+      - "8080:8080" #local_port : container_port
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: notesdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"   # optional, for local pgAdmin
+    restart: always
+
+volumes:
+  dbdata:
